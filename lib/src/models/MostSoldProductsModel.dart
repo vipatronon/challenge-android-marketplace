@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:lodjinha/src/models/CategoryModel.dart';
 
 class MostSoldProductsResponse {
