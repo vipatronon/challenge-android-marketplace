@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lodjinha/src/models/CategoryModel.dart';
 
-class CategoryHomeCard extends StatelessWidget {
-  CategoryHomeCard(this.categoryModel);
+class CategoryHomeCard extends StatefulWidget {
+  final CategoryModel categoryModel;
 
-  CategoryModel categoryModel;
+  CategoryHomeCard({Key key, @required this.categoryModel}) : super(key: key);
+
+  @override
+  _CategoryHomeCardState createState() => _CategoryHomeCardState(categoryModel);
+}
+
+class _CategoryHomeCardState extends State<CategoryHomeCard> with AutomaticKeepAliveClientMixin<CategoryHomeCard> {
+  CategoryModel  categoryModel;
+
+  _CategoryHomeCardState(this.categoryModel);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +25,7 @@ class CategoryHomeCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              flex: 2,
+                flex: 2,
                 child: Image.network(categoryModel.imageUrl)),
             Expanded(
               flex: 1,
@@ -35,6 +44,8 @@ class CategoryHomeCard extends StatelessWidget {
       ),
     );
   }
-}
 
+  @override
+  bool get wantKeepAlive => true;
+}
 

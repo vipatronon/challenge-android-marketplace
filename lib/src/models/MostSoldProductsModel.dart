@@ -40,7 +40,7 @@ class MostSoldProductsModel {
 
   int get id => _id;
 
-  String get name => _name;
+  String get productName => _name;
 
   double get previousPrice => _previousPrice;
 

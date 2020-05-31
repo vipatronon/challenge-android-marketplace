@@ -4,7 +4,6 @@ import 'package:lodjinha/src/blocs/ProductsBloc.dart';
 import 'package:lodjinha/src/models/CategoryModel.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
 import 'package:lodjinha/src/ui/common/ThinProductCard.dart';
-
 import 'CategoryHomeCard.dart';
 
 class Home extends StatelessWidget {
@@ -53,7 +52,7 @@ class Home extends StatelessWidget {
                     builder:
                         (context, AsyncSnapshot<CategoryResponse> snapshot) {
                       if (snapshot.hasData) {
-                        return buildList(snapshot);
+                        return buildCategory(snapshot);
                       } else {
                         return Text(snapshot.error.toString());
                       }
@@ -80,7 +79,7 @@ class Home extends StatelessWidget {
                   builder: (context,
                       AsyncSnapshot<MostSoldProductsResponse> snapshot) {
                     if (snapshot.hasData) {
-                      return buildList2(snapshot);
+                      return buildMostBuildProducts(snapshot);
                     } else {
                       return Text(snapshot.error.toString());
                     }
@@ -94,27 +93,30 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget buildList(AsyncSnapshot<CategoryResponse> snapshot) {
+  Widget buildCategory(AsyncSnapshot<CategoryResponse> snapshot) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
+      addAutomaticKeepAlives: true,
+
       itemCount: snapshot.data.data.length,
       itemBuilder: (BuildContext content, int index) {
         CategoryModel categoryModel = snapshot.data.data[index];
-        return CategoryHomeCard(categoryModel);
+        return CategoryHomeCard(categoryModel: categoryModel);
       },
     );
   }
 
-  Widget buildList2(AsyncSnapshot<MostSoldProductsResponse> snapshot) {
+  Widget buildMostBuildProducts(AsyncSnapshot<MostSoldProductsResponse> snapshot) {
     return Flexible(
         child: ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemCount: snapshot.data.data.length,
-      shrinkWrap: true,
-      itemBuilder: (BuildContext context, int index) {
-        MostSoldProductsModel mostSoldProductsModel = snapshot.data.data[index];
-        return ThinProductCard(mostSoldProductsModel);
+          addAutomaticKeepAlives: true,
+          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          itemCount: snapshot.data.data.length,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+          MostSoldProductsModel mostSoldProductsModel = snapshot.data.data[index];
+          return ThinProductCard(mostSoldProductsModel: mostSoldProductsModel);
       },
     ));
   }

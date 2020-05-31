@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
 
-class ThinProductCard extends StatelessWidget {
-  ThinProductCard(this.mostSoldProductsModel);
+class ThinProductCard extends StatefulWidget {
+  final MostSoldProductsModel mostSoldProductsModel;
 
+  ThinProductCard({Key key, @required this.mostSoldProductsModel}) : super(key: key);
+
+  @override
+  _ThinProductCardState createState() => _ThinProductCardState(mostSoldProductsModel);
+}
+
+class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAliveClientMixin<ThinProductCard> {
   MostSoldProductsModel mostSoldProductsModel;
+
+  _ThinProductCardState(this.mostSoldProductsModel);
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +24,18 @@ class ThinProductCard extends StatelessWidget {
           Expanded(
               flex: 2,
               child: Padding(
-                padding: EdgeInsets.all(5),
-                child: Container(
-                  //Lugar da imagem
-                  color: Colors.blueGrey,
-                ),
+                  padding: EdgeInsets.all(5),
+                  child: Image.network(mostSoldProductsModel.imageUrl)
               )),
           Expanded(
               flex: 7,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      mostSoldProductsModel.description,
+                      mostSoldProductsModel.productName,
                       style: TextStyle(
                           color: Color(0xFF2D3142),
                           fontFamily: 'Roboto',
@@ -75,4 +82,7 @@ class ThinProductCard extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
