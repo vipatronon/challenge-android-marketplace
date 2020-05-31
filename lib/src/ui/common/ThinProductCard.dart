@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
 
 class ThinProductCard extends StatelessWidget {
+  ThinProductCard(this.mostSoldProductsModel);
+
+  MostSoldProductsModel mostSoldProductsModel;
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -23,7 +28,7 @@ class ThinProductCard extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Nome do produto com uma descrição grandona',
+                      mostSoldProductsModel.description,
                       style: TextStyle(
                           color: Color(0xFF2D3142),
                           fontFamily: 'Roboto',
@@ -35,7 +40,7 @@ class ThinProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'De: 9999,99',
+                          "De:${mostSoldProductsModel.previousPrice.toString()}",
                           style: TextStyle(
                               color: Color(0xFFAAAAAA),
                               fontFamily: 'Roboto',
@@ -45,7 +50,7 @@ class ThinProductCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Por: 9999,99',
+                          "Por: ${mostSoldProductsModel.currentPrice}",
                           style: TextStyle(
                               color: Color(0xFFF15025),
                               fontFamily: 'Roboto',
