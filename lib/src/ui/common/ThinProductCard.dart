@@ -22,7 +22,7 @@ class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAli
       child: Row(
         children: <Widget>[
           Expanded(
-              flex: 2,
+              flex: 3,
               child: Padding(
                   padding: EdgeInsets.all(5),
                   child: Image.network(mostSoldProductsModel.imageUrl)
@@ -73,10 +73,10 @@ class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAli
           ),
           Expanded(
               flex: 1,
-              child: Container(
-                //Lugar da setinha
-                color: Colors.brown,
-              )
+              child: Padding(
+                padding: EdgeInsets.all(12),
+                  child: Image.asset('images/disclosure_indicator.png'),
+              ),
           ),
         ],
       ),
