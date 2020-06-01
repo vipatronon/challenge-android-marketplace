@@ -5,7 +5,9 @@ import 'package:lodjinha/src/blocs/ProductsBloc.dart';
 import 'package:lodjinha/src/models/BannerModel.dart';
 import 'package:lodjinha/src/models/CategoryModel.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
+import 'package:lodjinha/src/ui/common/AppnameText.dart';
 import 'package:lodjinha/src/ui/common/ThinProductCard.dart';
+import 'AboutPage.dart';
 import 'CategoryHomeCard.dart';
 import 'CustomCarousel.dart';
 
@@ -17,7 +19,7 @@ class Home extends StatelessWidget {
     bannersBloc.fetchAllBanners();
     return Scaffold(
       appBar: homeAppBar(),
-      drawer: appDrawer(),
+      drawer: appDrawer(context),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverList(
@@ -81,7 +83,7 @@ class Home extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
       child: InkWell(
-        onTap: () => callback,
+        onTap: () => callback(),
         child: Row(
           children: <Widget>[
             Image.asset(
@@ -106,7 +108,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget appDrawer(){
+  Widget appDrawer(BuildContext context){
     return Drawer(
       elevation: 3,
       child: ListView(
@@ -116,10 +118,7 @@ class Home extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.only(right: 5),
-                child: Text(
-                  'a Lodjinha',
-                  style: TextStyle(fontFamily: 'Pacifico', fontSize: 24),
-                ),
+                child: AppnameText(24),
               ),
             ),
             currentAccountPicture: CircleAvatar(
@@ -136,8 +135,16 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
-          drawerOption('home_menu','Home', () => {}),
-          drawerOption('tag_menu','Sobre o aplicativo', () => {})
+          drawerOption('home_menu','Home', () => {
+            Navigator.pop(context)
+          }),
+          drawerOption('tag_menu','Sobre o aplicativo', () => {
+            Navigator.pop(context),
+            Navigator.push(context,
+            MaterialPageRoute(
+              builder: (context) => About(),
+            ))
+          })
         ],
       ),
     );
@@ -169,10 +176,7 @@ class Home extends StatelessWidget {
               height: 45,
             ),
           ),
-          Text(
-            'a Lodjinha',
-            style: TextStyle(fontFamily: 'Pacifico'),
-          ),
+          AppnameText(22),
         ],
       ),
     );
