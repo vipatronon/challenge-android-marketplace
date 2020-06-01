@@ -17,24 +17,24 @@ class Home extends StatelessWidget {
     bannersBloc.fetchAllBanners();
     return Scaffold(
       appBar: homeAppBar(),
+      drawer: appDrawer(),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildListDelegate(
               [
                 AspectRatio(
-                    aspectRatio: 4 / 1.8,
-                    child: StreamBuilder(
-                      stream: bannersBloc.allBanners,
-                      builder: (context,
-                          AsyncSnapshot<BannerResponse> snapshot) {
-                        if (snapshot.hasData) {
-                          return buildCarousel(snapshot);
-                        } else {
-                          return Text(snapshot.error.toString());
-                        }
-                      },
-                    ),
+                  aspectRatio: 4 / 1.8,
+                  child: StreamBuilder(
+                    stream: bannersBloc.allBanners,
+                    builder: (context, AsyncSnapshot<BannerResponse> snapshot) {
+                      if (snapshot.hasData) {
+                        return buildCarousel(snapshot);
+                      } else {
+                        return Text(snapshot.error.toString());
+                      }
+                    },
+                  ),
                 ),
                 homeCategory('Categorias'),
                 AspectRatio(
@@ -71,7 +71,73 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget homeCategory(String categoryTitle){
+  Widget drawerOption(String imageName, String optionName, Function() callback){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+      child: InkWell(
+        onTap: () => callback,
+        child: Row(
+          children: <Widget>[
+            Image.asset(
+              'images/$imageName.png',
+              scale: 4,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Text(
+                optionName,
+                style: TextStyle(
+                    color: Color(0xFF000000),
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    letterSpacing: -0.3),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget appDrawer(){
+    return Drawer(
+      elevation: 3,
+      child: ListView(
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: Text(
+                  'a Lodjinha',
+                  style: TextStyle(fontFamily: 'Pacifico', fontSize: 24),
+                ),
+              ),
+            ),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Color(0xFFF15025),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset('images/logo_sobre.png'),
+              ),
+            ),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: ExactAssetImage('images/menu_pattern.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          drawerOption('home_menu','Home', () => {}),
+          drawerOption('tag_menu','Sobre o aplicativo', () => {})
+        ],
+      ),
+    );
+  }
+
+  Widget homeCategory(String categoryTitle) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
@@ -85,10 +151,9 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget homeAppBar(){
+  Widget homeAppBar() {
     return AppBar(
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5),
@@ -128,8 +193,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget buildMostBuildProducts(
-      AsyncSnapshot<MostSoldProductsResponse> snapshot) {
+  Widget buildMostBuildProducts(AsyncSnapshot<MostSoldProductsResponse> snapshot) {
     return Flexible(
         child: ListView.builder(
       addAutomaticKeepAlives: true,
@@ -143,4 +207,5 @@ class Home extends StatelessWidget {
       },
     ));
   }
+
 }
