@@ -31,7 +31,9 @@ class Home extends StatelessWidget {
                       if (snapshot.hasData) {
                         return buildCarousel(snapshot);
                       } else {
-                        return Text(snapshot.error.toString());
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
                       }
                     },
                   ),
@@ -46,7 +48,9 @@ class Home extends StatelessWidget {
                       if (snapshot.hasData) {
                         return buildCategory(snapshot);
                       } else {
-                        return Text(snapshot.error.toString());
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
                       }
                     },
                   ),
@@ -59,7 +63,9 @@ class Home extends StatelessWidget {
                     if (snapshot.hasData) {
                       return buildMostBuildProducts(snapshot);
                     } else {
-                      return Text(snapshot.error.toString());
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
                   },
                 ),
