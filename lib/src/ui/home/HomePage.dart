@@ -202,8 +202,8 @@ class Home extends StatelessWidget {
       itemCount: snapshot.data.data.length,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        MostSoldProductsModel mostSoldProductsModel = snapshot.data.data[index];
-        return ThinProductCard(mostSoldProductsModel: mostSoldProductsModel);
+        ProductModel mostSoldProductsModel = snapshot.data.data[index];
+        return ThinProductCard(productsModel: mostSoldProductsModel);
       },
     ));
   }

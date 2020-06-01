@@ -1,21 +1,21 @@
 import 'package:lodjinha/src/models/CategoryModel.dart';
 
 class MostSoldProductsResponse {
-  List<MostSoldProductsModel> _data = [];
+  List<ProductModel> _data = [];
 
   MostSoldProductsResponse.fromJson(Map<String, dynamic> parsedJson) {
-    List<MostSoldProductsModel> _temp = [];
+    List<ProductModel> _temp = [];
     for(int i = 0; i<parsedJson["data"].length; i++){
-      MostSoldProductsModel mostSoldProductsModel = MostSoldProductsModel(parsedJson["data"][i]);
+      ProductModel mostSoldProductsModel = ProductModel(parsedJson["data"][i]);
       _temp.add(mostSoldProductsModel);
     }
     _data = _temp;
   }
 
-  List<MostSoldProductsModel> get data => _data;
+  List<ProductModel> get data => _data;
 }
 
-class MostSoldProductsModel {
+class ProductModel {
   CategoryModel _categoryModel;
   String _description;
   int _id;
@@ -24,7 +24,7 @@ class MostSoldProductsModel {
   double _currentPrice;
   String _imageUrl;
 
-  MostSoldProductsModel(parsedJson) {
+  ProductModel(parsedJson) {
     _description = parsedJson["descricao"];
     _id = parsedJson["id"];
     _name = parsedJson["nome"];

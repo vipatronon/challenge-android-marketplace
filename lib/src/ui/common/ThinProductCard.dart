@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
 
 class ThinProductCard extends StatefulWidget {
-  final MostSoldProductsModel mostSoldProductsModel;
+  final ProductModel productsModel;
 
-  ThinProductCard({Key key, @required this.mostSoldProductsModel}) : super(key: key);
+  ThinProductCard({Key key, @required this.productsModel}) : super(key: key);
 
   @override
-  _ThinProductCardState createState() => _ThinProductCardState(mostSoldProductsModel);
+  _ThinProductCardState createState() => _ThinProductCardState(productsModel);
 }
 
 class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAliveClientMixin<ThinProductCard> {
-  MostSoldProductsModel mostSoldProductsModel;
+  ProductModel productsModel;
 
-  _ThinProductCardState(this.mostSoldProductsModel);
+  _ThinProductCardState(this.productsModel);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAli
               flex: 3,
               child: Padding(
                   padding: EdgeInsets.all(5),
-                  child: Image.network(mostSoldProductsModel.imageUrl)
+                  child: Image.network(productsModel.imageUrl)
               )),
           Expanded(
               flex: 7,
@@ -35,7 +35,7 @@ class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAli
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      mostSoldProductsModel.productName,
+                      productsModel.productName,
                       style: TextStyle(
                           color: Color(0xFF2D3142),
                           fontFamily: 'Roboto',
@@ -47,7 +47,7 @@ class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAli
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          "De:${mostSoldProductsModel.previousPrice.toString()}",
+                          "De:${productsModel.previousPrice.toString()}",
                           style: TextStyle(
                               color: Color(0xFFAAAAAA),
                               fontFamily: 'Roboto',
@@ -57,7 +57,7 @@ class _ThinProductCardState extends State<ThinProductCard> with AutomaticKeepAli
                           ),
                         ),
                         Text(
-                          "Por: ${mostSoldProductsModel.currentPrice}",
+                          "Por: ${productsModel.currentPrice}",
                           style: TextStyle(
                               color: Color(0xFFF15025),
                               fontFamily: 'Roboto',
