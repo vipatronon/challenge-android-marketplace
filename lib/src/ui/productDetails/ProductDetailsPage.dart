@@ -4,10 +4,12 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:lodjinha/src/blocs/ProductsBloc.dart';
 import 'package:lodjinha/src/models/BookProductModel.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
-import 'package:lodjinha/src/ui/common/CurrentProductPrice.dart';
 import 'package:lodjinha/src/ui/common/PreviousProductPrice.dart';
+import 'package:lodjinha/src/ui/common/CurrentProductPrice.dart';
 import 'package:lodjinha/src/ui/common/ProductName.dart';
-
+import 'package:lodjinha/src/utils/ColorPalette.dart';
+import 'package:lodjinha/src/utils/FontFamilies.dart';
+import 'package:lodjinha/src/utils/Strings.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel productModel;
@@ -64,8 +66,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                currentProductPrice(productModel.currentPrice),
-                                previousProductPrice(
+                                previousProductPrice(productModel.currentPrice),
+                                currentProductPrice(
                                     productModel.previousPrice),
                               ],
                             ),
@@ -78,10 +80,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   horizontal: horizontalPadding,
                                   vertical: verticalPadding),
                               child: Text(
-                                'Descrição',
+                                Strings.productDetailsDescription,
                                 style: TextStyle(
-                                    color: Color(0xFF2D3142),
-                                    fontFamily: 'Roboto',
+                                    color: ColorPalette.dark,
+                                    fontFamily: FontFamilies.roboto,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14),
                               ),
@@ -109,11 +111,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                         if (snapshot.data.result == 'success') {
                           WidgetsBinding.instance.addPostFrameCallback((_) =>
                               showMyDialog(context,
-                                  'Produto reservado com sucesso', true));
+                                  Strings.productDetailsBookSuccess, true));
                         } else {
                           WidgetsBinding.instance.addPostFrameCallback((_) =>
                               showMyDialog(context,
-                                  'Erro ao reservar o produto', false));
+                                  Strings.productDetailsBookFail, false));
                         }
                         return Container();
                       } else {
@@ -135,7 +137,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           }
         },
         child: Icon(Icons.check),
-        backgroundColor: Color(0xFF5E2A84),
+        backgroundColor: ColorPalette.warmPurple,
       ),
     );
   }
@@ -148,7 +150,7 @@ Future<void> showMyDialog(
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Reserva'),
+        title: Text(Strings.productDetailsDialogTitle),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
@@ -158,7 +160,7 @@ Future<void> showMyDialog(
         ),
         actions: <Widget>[
           FlatButton(
-            child: Text('Approve'),
+            child: Text(Strings.productDetailsDialogConfirm),
             onPressed: () {
               if (navigateBack) {
                 Navigator.of(context).pop();

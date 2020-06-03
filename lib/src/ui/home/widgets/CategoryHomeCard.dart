@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lodjinha/src/models/CategoryModel.dart';
 import 'package:lodjinha/src/ui/categoryDetails/CategoryDetailsPage.dart';
+import 'package:lodjinha/src/utils/ColorPalette.dart';
+import 'package:lodjinha/src/utils/FontFamilies.dart';
 
 class CategoryHomeCard extends StatefulWidget {
   final CategoryModel categoryModel;
@@ -44,8 +46,8 @@ class _CategoryHomeCardState extends State<CategoryHomeCard>
                 categoryModel.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: Color(0xFF2D3142),
-                    fontFamily: 'Roboto',
+                    color: ColorPalette.dark,
+                    fontFamily: FontFamilies.roboto,
                     fontWeight: FontWeight.normal,
                     fontSize: 13),
               ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
-import 'package:lodjinha/src/ui/common/CurrentProductPrice.dart';
+import 'package:lodjinha/src/ui/common/PreviousProductPrice.dart';
 import 'package:lodjinha/src/ui/common/ProductName.dart';
 import 'package:lodjinha/src/ui/productDetails/ProductDetailsPage.dart';
-import 'PreviousProductPrice.dart';
+import 'CurrentProductPrice.dart';
 
 class ThinProductCard extends StatefulWidget {
   final ProductModel productsModel;
@@ -51,8 +51,8 @@ class _ThinProductCardState extends State<ThinProductCard>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          currentProductPrice(productsModel.currentPrice),
-                          previousProductPrice(productsModel.previousPrice),
+                          previousProductPrice(productsModel.currentPrice),
+                          currentProductPrice(productsModel.previousPrice),
                         ],
                       )
                     ],

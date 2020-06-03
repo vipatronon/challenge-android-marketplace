@@ -7,9 +7,12 @@ import 'package:lodjinha/src/models/CategoryModel.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
 import 'package:lodjinha/src/ui/common/AppnameText.dart';
 import 'package:lodjinha/src/ui/common/ThinProductCard.dart';
-import 'AboutPage.dart';
-import 'CategoryHomeCard.dart';
-import 'CustomCarousel.dart';
+import 'package:lodjinha/src/utils/ColorPalette.dart';
+import 'package:lodjinha/src/utils/FontFamilies.dart';
+import 'package:lodjinha/src/utils/Strings.dart';
+import '../widgets/CategoryHomeCard.dart';
+import '../widgets/CustomCarousel.dart';
+import '../widgets/Drawer.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -40,7 +43,7 @@ class Home extends StatelessWidget {
                     },
                   ),
                 ),
-                homeCategory('Categorias'),
+                homeCategory(Strings.homeCategories),
                 AspectRatio(
                   aspectRatio: 4 / 1.2,
                   child: StreamBuilder(
@@ -57,13 +60,13 @@ class Home extends StatelessWidget {
                     },
                   ),
                 ),
-                homeCategory('Mais Vendidos'),
+                homeCategory(Strings.homeMostSold),
                 StreamBuilder(
                   stream: productsBloc.mostSoldProducts,
                   builder: (context,
                       AsyncSnapshot<MostSoldProductsResponse> snapshot) {
                     if (snapshot.hasData) {
-                      return buildMostBuildProducts(snapshot);
+                      return buildMostSoldProducts(snapshot);
                     } else {
                       return Center(
                         child: CircularProgressIndicator(),
@@ -79,85 +82,14 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget drawerOption(String imageName, String optionName, Function() callback){
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-      child: InkWell(
-        onTap: () => callback(),
-        child: Row(
-          children: <Widget>[
-            Image.asset(
-              'images/$imageName.png',
-              scale: 4,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: Text(
-                optionName,
-                style: TextStyle(
-                    color: Color(0xFF000000),
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    letterSpacing: -0.3),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget appDrawer(BuildContext context){
-    return Drawer(
-      elevation: 3,
-      child: ListView(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 5),
-                child: AppnameText(24),
-              ),
-            ),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Color(0xFFF15025),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Image.asset('images/logo_sobre.png'),
-              ),
-            ),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: ExactAssetImage('images/menu_pattern.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          drawerOption('home_menu','Home', () => {
-            Navigator.pop(context)
-          }),
-          drawerOption('tag_menu','Sobre o aplicativo', () => {
-            Navigator.pop(context),
-            Navigator.push(context,
-            MaterialPageRoute(
-              builder: (context) => About(),
-            ))
-          })
-        ],
-      ),
-    );
-  }
-
   Widget homeCategory(String categoryTitle) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
         categoryTitle,
         style: TextStyle(
-            color: Color(0xFF2D3142),
-            fontFamily: 'Roboto',
+            color: ColorPalette.dark,
+            fontFamily: FontFamilies.roboto,
             fontWeight: FontWeight.normal,
             fontSize: 17),
       ),
@@ -203,18 +135,20 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget buildMostBuildProducts(AsyncSnapshot<MostSoldProductsResponse> snapshot) {
+  Widget buildMostSoldProducts(
+      AsyncSnapshot<MostSoldProductsResponse> snapshot) {
     return Flexible(
-        child: ListView.builder(
-      addAutomaticKeepAlives: true,
-      physics: NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemCount: snapshot.data.data.length,
-      shrinkWrap: true,
-      itemBuilder: (BuildContext context, int index) {
-        ProductModel mostSoldProductsModel = snapshot.data.data[index];
-        return ThinProductCard(productsModel: mostSoldProductsModel);
-      },
-    ));
+      child: ListView.builder(
+        addAutomaticKeepAlives: true,
+        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        itemCount: snapshot.data.data.length,
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) {
+          ProductModel mostSoldProductsModel = snapshot.data.data[index];
+          return ThinProductCard(productsModel: mostSoldProductsModel);
+        },
+      ),
+    );
   }
 }

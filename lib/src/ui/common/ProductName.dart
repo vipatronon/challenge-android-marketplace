@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:lodjinha/src/utils/ColorPalette.dart';
+import 'package:lodjinha/src/utils/FontFamilies.dart';
 
 Widget productName(String productName){
   return Text(
     productName,
     style: TextStyle(
-        color: Color(0xFF2D3142),
-        fontFamily: 'Roboto',
+        color: ColorPalette.dark,
+        fontFamily: FontFamilies.roboto,
         fontWeight: FontWeight.w500,
         fontSize: 18),
   );

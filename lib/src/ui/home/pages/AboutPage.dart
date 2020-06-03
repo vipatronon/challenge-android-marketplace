@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lodjinha/src/ui/common/AppnameText.dart';
+import 'package:lodjinha/src/utils/ColorPalette.dart';
+import 'package:lodjinha/src/utils/FontFamilies.dart';
+import 'package:lodjinha/src/utils/Strings.dart';
 
 class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sobre'),
+        title: Text(Strings.appName),
       ),
       body: Center(
         child: Column(
@@ -21,7 +24,7 @@ class About extends StatelessWidget {
                   'images/logo_sobre.png',
                   scale: 3.5,
                 ),
-                AppnameText(60, Color(0xFF4A4A4A)),
+                AppnameText(60, ColorPalette.greyishBrown),
               ],
             ),
             Column(
@@ -29,9 +32,9 @@ class About extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(3),
                   child: Text(
-                    'Victor Pedrosa da Costa',
+                    Strings.aboutDevName,
                     style: TextStyle(
-                        fontFamily: 'Roboto',
+                        fontFamily: FontFamilies.roboto,
                         letterSpacing: -0.3,
                         fontWeight: FontWeight.w400,
                         fontSize: 14),
@@ -40,9 +43,9 @@ class About extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(3),
                   child: Text(
-                    '03/06/2020',
+                    Strings.aboutDevelopmentDate,
                     style: TextStyle(
-                        fontFamily: 'Roboto',
+                        fontFamily: FontFamilies.roboto,
                         letterSpacing: -0.3,
                         fontWeight: FontWeight.w200,
                         fontSize: 12),

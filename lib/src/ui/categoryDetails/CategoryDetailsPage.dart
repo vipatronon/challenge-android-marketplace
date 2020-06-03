@@ -6,6 +6,7 @@ import 'package:lodjinha/src/models/CategoryModel.dart';
 import 'package:lodjinha/src/models/CategoryProductModel.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
 import 'package:lodjinha/src/ui/common/ThinProductCard.dart';
+import 'package:lodjinha/src/utils/Strings.dart';
 
 class CategoryDetails extends StatefulWidget {
   final CategoryModel categoryModel;
@@ -72,7 +73,7 @@ class _CategoryDetailsState extends State<CategoryDetails>
                             'images/filter.png',
                             scale: 5,
                           ),
-                          Text('Nenhum produto para a categoria selecionada'),
+                          Text(Strings.categoryDetailsNoneProduct),
                         ],
                       ),
                     ),
