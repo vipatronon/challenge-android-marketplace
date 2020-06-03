@@ -1,3 +1,4 @@
+import 'package:lodjinha/src/models/BookProductModel.dart';
 import 'package:lodjinha/src/models/MostSoldProductsModel.dart';
 import 'package:lodjinha/src/models/CategoryProductModel.dart';
 import 'package:lodjinha/src/resources/repository.dart';
@@ -7,9 +8,11 @@ class ProductsBloc {
   final _repository = Repository();
   final _mostSoldProductsFetcher = PublishSubject<MostSoldProductsResponse>();
   final _categoryProductsFetcher = PublishSubject<CategoryProductModel>();
+  final _productBooker = PublishSubject<BookProductModel>();
 
   Observable<MostSoldProductsResponse> get mostSoldProducts => _mostSoldProductsFetcher.stream;
   Observable<CategoryProductModel> get categoryProducts => _categoryProductsFetcher.stream;
+  Observable<BookProductModel> get bookedProduct => _productBooker.stream;
 
   fetchMostSoldProducts() async {
     MostSoldProductsResponse mostSoldProductsResponse = await _repository.fetchMostSoldProducts();
@@ -21,9 +24,15 @@ class ProductsBloc {
     _categoryProductsFetcher.sink.add(productCategoryModel);
   }
 
+  bookProduct(int productId) async {
+    BookProductModel productModel = await _repository.bookProduct(productId);
+    _productBooker.sink.add(productModel);
+  }
+
   dispose(){
     _mostSoldProductsFetcher.close();
     _categoryProductsFetcher.close();
+    _productBooker.close();
   }
 }
 

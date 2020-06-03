@@ -26,14 +26,18 @@ class _CategoryHomeCardState extends State<CategoryHomeCard>
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CategoryDetails(categoryModel: categoryModel),
+              builder: (context) =>
+                  CategoryDetails(categoryModel: categoryModel),
             ),
           );
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(flex: 2, child: Image.network(categoryModel.imageUrl)),
+            Expanded(
+              flex: 2,
+              child: Image.network(categoryModel.imageUrl),
+            ),
             Expanded(
               flex: 1,
               child: Text(
