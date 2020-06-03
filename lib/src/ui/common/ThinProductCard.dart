@@ -48,12 +48,14 @@ class _ThinProductCardState extends State<ThinProductCard>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       productName(productsModel.productName),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          previousProductPrice(productsModel.currentPrice),
-                          currentProductPrice(productsModel.previousPrice),
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            previousProductPrice(productsModel.currentPrice),
+                            currentProductPrice(productsModel.previousPrice),
+                          ],
+                        ),
                       )
                     ],
                   ),
