@@ -1,3 +1,18 @@
+# Instruções de execução
+
+Desafio feito em flutter
+
+- Clone o projeto
+- execute o pub get na raiz
+- rode o projeto em um simulador/emulador/device, a escolha
+
+Testado em: 
+- Simulador iPhoneSE iOS 13.4.1
+- Emulador Android API 28
+- Emulador Android API 22
+- One Plus 6T
+- iPad Air 2 iOS 13.4.1
+
 # challenge-android-marketplace
 
 o Lodjinha
